@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static i18n crispy_forms_tags %}
+
+{% block content %}
+<div class="container-fluid page-body-wrapper">
+   <div class="main-panel">
+      <div class="content-wrapper">
+         <div class="col-md-12 d-flex align-items-stretch">
+            <div class="row flex-grow">
+               <div class="col-md-12">
+                  <div class="col-10 offset-md-1 cal-pad" >
+                     <div class="card">
+                        <div class="card-body">
+                           <h2 class="card-title"><strong>Add Currency</strong></h2>
+                           <hr>
+                           <div class="col-10 offset-md-1 cal-pad" >
+                              <form method="post" role="form" autocomplete="off" id="currency-form">
+                                 {% csrf_token %}
+                                 {% crispy form %}
+                              </form>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock content %}

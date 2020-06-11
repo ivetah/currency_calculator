@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% csrf_token %}
+
+<div class="container-fluid page-body-wrapper">
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="col-md-12 d-flex align-items-stretch">
+          <div class="row flex-grow">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-body">
+                  <h2 class="card-title"><strong>Currency calculator</strong></h2>
+                  <hr>
+                  <div class="col-10 offset-md-1 cal-pad" >
+                    <div class="row">
+                      <div class="div-margin">
+                        <label for="value" class="label-extended">Amount</label>
+                        <input type="number" name="value" id="value" class="input-border">
+                      </div>
+  
+                      <div class="div-margin">
+                        <label for="from" class="label-extended">From</label>
+                        <select name="currency_from" class="input-border" id="from">
+                          {% for currency in currencies %}
+                          <option value="{{currency.currency_code}}">{{currency.currency_code}} - {{currency.currency_name}}</option>
+                          {% endfor %}
+                        </select> 
+                      </div>
+  
+                      <div>
+                       <button id="swap" class="btn-swap"><i class="fa fa-exchange fa-margin" ></i></button>
+                      </div>
+  
+                      <div class="div-margin">
+                        <label class="label-extended" for="to">To</label>
+                        <select name="currency_to" id="to">
+                            {% for currency in currencies %}
+                            <option value="{{currency.currency_code}}">{{currency.currency_code}} - {{currency.currency_name}}</option>
+                            {% endfor %}
+                        </select>
+                      </div>
+  
+                      <div class="div-margin">
+                        <button class="convert_button btn btn-primary cal-pad"  id="convert"> 
+                          <i class="fa fa-angle-right"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                 
+                  
+                  <div class="row">
+                    <label class="result"> <strong id="result"></strong></label>
+                  </div>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+<script>
+  $('select').select2({});
+
+  $( "#convert" ).click(function() {
+    $.ajax({
+        url:  "{% url 'calculator:ajax_calcalate' %}",
+        type: 'POST',
+        data: {
+          'value': $('#value').val(),
+          'from_c': $('#from').children("option:selected").val(),
+          'to_c': $('#to').children("option:selected").val(),
+          'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        success: function(data) {
+          result = `${$('#value').val()} ${$('#from').children("option:selected").val()} = ${data.result} ${$('#to').children("option:selected").val()} `
+          $('#result').text(result)
+        },
+        error: function(response) {
+          console.log(response)
+        }
+      });
+  });
+    
+  $( "#swap" ).click(function() {
+
+    from_c = $('#from').children("option:selected").val()
+    to_c = $('#to').children("option:selected").val()
+    $('#from').val(to_c).trigger('change');
+    $('#to').val(from_c).trigger('change');
+  });
+</script>
+{% endblock %}
+
+
+

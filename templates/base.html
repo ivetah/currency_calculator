@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+   {% load static %}
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
+      <link rel="stylesheet" href="{% static 'css/jquery-ui.theme.min.css' %}">
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+      <link rel="stylesheet" href="{% static 'css/select2.css' %}">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      {% block stylesheets %}{% endblock %}
+   </head>
+   <body>
+      <div class="container-scroller landing-page">
+         {% include "_partials/header.html" %}
+      </div>
+      {% block header %}{% endblock %}
+      {% block content %}{% endblock content %}
+      <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/select2.js' %}"></script>
+      {% block javascripts %}{% endblock %}
+   </body>
+</html>

@@ -1,0 +1,18 @@
+{% load static  %}
+<nav class="navbar horizontal-layout col-lg-12 col-12 p-0">
+   <div class="nav-bottom">
+      <div class="container">
+         <ul class="nav page-navigation">
+            <li class="nav-item">
+               <a href="{% url 'calculator:currencies' %}" class="nav-link"><i class="link-icon mdi mdi-television"></i><span class="menu-title">Currencies</span></a>
+            </li>
+            <li class="nav-item">
+               <a href="{% url 'calculator:currency_calculator' %}" class="nav-link"><i class="link-icon mdi mdi-apple-safari"></i><span class="menu-title">Currency calculator</span></a>
+            </li>
+            <li class="nav-item">
+               <a href="{% url 'calculator:add_currency' %}" class="nav-link"><i class="link-icon mdi mdi-apple-safari"></i><span class="menu-title">Add Currency</span></a>
+            </li>
+         </ul>
+      </div>
+   </div>
+</nav>

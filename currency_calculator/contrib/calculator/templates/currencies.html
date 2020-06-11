@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container-fluid page-body-wrapper">
+   <div class="main-panel">
+      <div class="content-wrapper">
+         <div class="col-md-12 d-flex align-items-stretch">
+            <div class="row flex-grow">
+               <div class="col-md-12">
+                  <div class="row">
+                     <div class="col-12">
+                        <div class="row flex-grow">
+                           <div class="col-12 grid-margin">
+                              <h2 class="card-title">
+                                 Currencies
+                                 <a href="{% url 'calculator:currencies' %}?sync">
+                                 <button class="btn btn-primary modal-sync pull-right">
+                                 <i class="fa fa-refresh"></i>
+                                 SYNC</button>
+                                 </a>
+                              </h2>
+                              <div class="table-responsive">
+                                 <table class="table table-striped">
+                                    <thead>
+                                       <tr>
+                                          <th >Name</th>
+                                          <th>Code</th>
+                                          <th>For unit currency</th>
+                                          <th>Lv (BGN)</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                       {% for currency in object_list %}
+                                       <tr>
+                                          <td><b>{{currency.currency_name}}</b></td>
+                                          <td>{{currency.currency_code}}</td>
+                                          <td>{{currency.currency_unit}}</td>
+                                          <td>{{ currency.currency_value}}</td>
+                                       </tr>
+                                       {% endfor %}
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock content %}
