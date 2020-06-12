@@ -9,11 +9,3 @@ class Currency(models.Model):
     currency_unification_unit =  models.FloatField(blank=False, null=False)
     def __str__(self):
         return '{}'.format(self.currency_name)
-
-class CurrencyProxy(Currency):
-    class Meta:
-        proxy = True
-        auto_created = True
-        
-    def get_currency_unit(self):
-        return float(self.currency_value / self.currency_unit)
